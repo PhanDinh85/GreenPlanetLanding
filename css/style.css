@@ -1,0 +1,93 @@
+.leading-2 {
+    line-height: 1.15;
+}
+
+.text-xxs {
+    font-size: .6875rem;
+}
+
+.planting-meter-callout {
+    position: relative;
+}
+
+.planting-meter-callout .bg-green-gradient {
+    background-image: linear-gradient(to right, #88b636 0%, #5d9b22 51%, #88b636 100%);
+    transition: all .4s;
+    background-size: 250% auto;
+}
+
+.planting-meter-callout .bg-green-gradient:hover {
+    background-position: right center;
+}
+
+.planting-meter-callout .bg-green-gradient .right-arrow {
+    position: relative;
+    transition: all .4s;
+    right: 0;
+}
+
+.planting-meter-callout .bg-green-gradient:hover .right-arrow {
+    transform: translateX(3px);
+}
+
+.planting-meter-callout:before {
+    content: '';
+    background-image: url(images/tree-group.png);
+    background-size: 70px 66px;
+    background-repeat: no-repeat;
+    width: 70px;
+    height: 66px;
+    position: absolute;
+    top: -66px;
+    left: calc(50% - 30px);
+}
+
+.achieve-sparkle {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+}
+
+.achieve-goal {
+    position: absolute;
+    bottom: -12px;
+    right: 0;
+}
+
+img.paypal-thumb {
+    /*width: 3rem !important;*/
+    max-width: 4rem !important;
+    flex: 1;
+    /*   padding-bottom: .25rem;
+    padding-right: .5rem;
+    border-right: 1px solid #dee2e6;*/
+    display: inline-block !important;
+}
+
+img.apple-pay-thumb {
+    /*width: 2.75rem !important;*/
+    max-width: 2.75rem !important;
+    flex: 1;
+    /*       margin-top: -.25rem;
+    padding-left: .5rem;
+    padding-right: .5rem;*/
+    border-right: 1px solid #dee2e6;
+}
+
+img.venmo-thumb {
+    /*width: 3rem !important;*/
+    max-width: 3rem !important;
+    flex: 1;
+    /* padding-bottom: .25rem;
+    padding-left: .5rem;*/
+}
+
+.isGift .badge:after {
+    content: url(images/icon-heart.svg);
+    max-width: 20px;
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: -16px;
+    right: -2px;
+}

@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700,900&amp;display=swap" rel="stylesheet" />
+  <script src="./js/main.js"></script>
+
+  <link rel="stylesheet" href="./build/tailwind.css" />
+  <style>
+    .leading-2 {
+      line-height: 1.15;
+    }
+
+    .text-xxs {
+      font-size: 0.6875rem;
+    }
+
+    .planting-meter-callout {
+      position: relative;
+    }
+
+    .planting-meter-callout .bg-green-gradient {
+      background-image: linear-gradient(to right,
+          #88b636 0%,
+          #5d9b22 51%,
+          #88b636 100%);
+      transition: all 0.4s;
+      background-size: 250% auto;
+    }
+
+    .planting-meter-callout .bg-green-gradient:hover {
+      background-position: right center;
+    }
+
+    .planting-meter-callout .bg-green-gradient .right-arrow {
+      position: relative;
+      transition: all 0.4s;
+      right: 0;
+    }
+
+    .planting-meter-callout .bg-green-gradient:hover .right-arrow {
+      transform: translateX(3px);
+    }
+
+    .planting-meter-callout:before {
+      content: "";
+      background-image: url(images/tree-group.png);
+      background-size: 70px 66px;
+      background-repeat: no-repeat;
+      width: 70px;
+      height: 66px;
+      position: absolute;
+      top: -66px;
+      left: calc(50% - 30px);
+    }
+
+    .achieve-sparkle {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+    }
+
+    .achieve-goal {
+      position: absolute;
+      bottom: -12px;
+      right: 0;
+    }
+
+    img.paypal-thumb {
+      /*width: 3rem !important;*/
+      max-width: 4rem !important;
+      flex: 1;
+      /*   padding-bottom: .25rem;
+    padding-right: .5rem;
+    border-right: 1px solid #dee2e6;*/
+      display: inline-block !important;
+    }
+
+    img.apple-pay-thumb {
+      /*width: 2.75rem !important;*/
+      max-width: 2.75rem !important;
+      flex: 1;
+      /*       margin-top: -.25rem;
+    padding-left: .5rem;
+    padding-right: .5rem;*/
+      border-right: 1px solid #dee2e6;
+    }
+
+    img.venmo-thumb {
+      /*width: 3rem !important;*/
+      max-width: 3rem !important;
+      flex: 1;
+      /* padding-bottom: .25rem;
+    padding-left: .5rem;*/
+    }
+
+    .isGift .badge:after {
+      content: url(images/icon-heart.svg);
+      max-width: 20px;
+      width: 100%;
+      height: auto;
+      position: absolute;
+      top: -16px;
+      right: -2px;
+    }
+
+    #hamburger-menu {
+      transition: transform 0.3s ease-in-out;
+    }
+  </style>
+
+</head>
+
+<body class="min-h-screen bg-white">
+
+  <div id="hamburger-menu" style="z-index: 100;" class="fixed right-0 top-0 w-full md:w-1/2 lg:w-1/3 max-w-lg h-full 
+    bg-spruce flex flex-col px-4 pl-8 transition transition-all duration-200 transform hidden">
+    <div id="close-menu"
+      class="w-12 h-12 bg-white rounded-full flex items-center justify-center ml-auto mt-4 cursor-pointer">
+      <span class="text-3xl block" aria-hidden="true">×</span>
+    </div>
+    <div class="flex-1 flex flex-col justify-center">
+      <div class="relative">
+        <a href="#home" class="block text-xl md:text-3xl text-white font-black uppercase">Home</a>
+        <img src="/img/leaf.png" class="absolute w-8 top-0 left-0 ml-24 -mt-2">
+      </div>
+      <a href="#section-donate" class="block text-xl md:text-3xl text-white font-black uppercase mt-4">Join
+        #TeamTrees</a>
+      <a href="#leaderboard" class="block text-xl md:text-3xl text-white font-black uppercase mt-4">Leaderboard</a>
+      <a href="#social-feed" class="block text-xl md:text-3xl text-white font-black uppercase mt-4">Social</a>
+      <a href="#planting-projects" class="block text-xl md:text-3xl text-white font-black uppercase mt-4">Planting
+        Projects</a>
+    </div>
+    <div class="transform -rotate-6 my-12 mb-24 mx-4 w-64">
+      <div class="bg-fern rounded-full p-4 relative" style="max-width: 240px;">
+        <div class="flex flex-wrap items-center">
+          <div class="w-1/4 pl-3 text-center">
+            <img src="img/trophy-check.png" class="">
+          </div>
+          <div class="w-3/4 pl-3 pr-3">
+            <p class="text-white text-sm">20 million trees are in the ground!</p>
+          </div>
+        </div>
+        <div class="bg-sunset inline-block px-3 py-1 rounded-full -mt-3 text-right achieve-goal">
+          <p class="text-white text-xxs uppercase tracking-wider">Original Goal Met</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="home">
+    <div class="absolute inset-0 bg-spruce" style="height: 110%"></div>
+    <div class="absolute inset-0" style="background-image: url('img/stars.png'); height: 110%"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-sky" style="height: 110%"></div>
+    <header class="relative text-white h-full overflow-hidden" style="min-height: 70vh">
+      <div class="absolute inset-0 bg-spruce" style="height: 110%"></div>
+      <div class="absolute inset-0" style="background-image: url('img/stars.png'); height: 110%"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent to bg-[#b4dbe1]" style="height: 110%"></div>
+      <div class="relative mb-4 pb-24 md:pb-48">
+        <div class="flex flex-col h-full items-center justify-center pt-4 md:pt-16">
+          <div class="flex flex-row justify-around w-full px-4">
+            <div class="w-12 h-12"></div>
+            <div id="hero-logo" class="flex-1 flex items-center justify-center mr-12">
+              <img src="img/logo.png" class="h-8 md:h-20" />
+            </div>
+            <div id="open-menu"
+              class="border w-12 h-12 bg-white rounded-full flex items-center justify-center fixed right-0 top-0 mr-4 mt-4 z-50"
+              style="z-index: 60">
+              <img src="/img/menu-button-2.png" class="w-4 h-3" />
+            </div>
+          </div>
+          <h1 class="mt-12 text-5xl lg:text-5xl text-white font-black uppercase text-center leading-2">
+            Join the movement!
+          </h1>
+          <div class="flex flex-col-reverse lg:flex-row items-center lg:items-start w-full max-w-screen-xl">
+            <div class="flex-1 items-start justify-start">
+              <div class="transform -rotate-6 my-8 mb-4 lg:my-0 lg:mb-0 max-w-xs pl-12 pb-6">
+                <img src="img/astronaut-heart-trees.png"
+                  class="absolute left-0 -ml-4 xl:-ml-8 top-0 w-16 xl:w-24 object-contain" />
+                <div class="absolute mx-auto bottom-0 left-0 mb-4" style="max-width: 240px; left: 20%">
+                  <div class="bg-fern rounded-full p-4 relative">
+                    <div class="flex flex-wrap items-center">
+                      <div class="w-1/4 pl-3 text-center">
+                        <img src="img/trophy-check-animated.gif" class="" />
+                      </div>
+                      <div class="w-3/4 pl-3 pr-3">
+                        <p class="text-white text-sm">
+                          20 million trees are in the ground!
+                        </p>
+                      </div>
+                    </div>
+                    <div class="bg-sunset inline-block px-3 py-1 rounded-full -mt-3 text-right achieve-goal">
+                      <p class="text-white text-xxs uppercase tracking-wider">
+                        Original Goal Met
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="mt-4 px-4 text-white font-medium max-w-xl text-center text-md md:text-lg lg:text-xl md:mt-8"
+              style="flex: 2">
+              The team is growing every day and scoring wins for the planet.
+              Plant with us and track our progress!
+            </p>
+            <div class="flex-1 hidden md:block"></div>
+          </div>
+          <h2 id="totalTrees" data-count="24744410"
+            class="counter text-7xl sm:text-8xl lg:text-hero font-black pb-24 md:pb-0">
+            24,744,410
+          </h2>
+        </div>
+      </div>
+    </header>
+  </div>
+  <img src="img/big-header.png"
+    class="z-30 hidden lg:block relative w-screen object-cover object-center z-20 -mt-48 xl:-mt-64"
+    style="min-height: 450px" />
+  <img src="img/header.png" class="z-30 block lg:hidden relative w-screen object-cover object-center z-20 -mt-48"
+    style="min-height: 400px" />
+
+  <div id="section-donate" class="pb-48 relative bg-gradient-to-b from-white bg-[#b4dbe1]">
+    <div id="donate" class="relative top-0 w-full z-40 -mt-24 xl:-mt-48 px-2 md:px-4 pointer-events-none">
+      <div class="mx-auto -mt-24">
+        <div class="pointer-events-auto bg-white rounded-lg shadow-lg w-full max-w-sm mx-auto w-full p-4 md:p-6 pt-6">
+          <div id="donationAmountCard" class="checkout">
+            <h3 class="text-center text-spruce text-2xl font-black uppercase">
+              Join #TeamTrees!
+            </h3>
+            <p class="text-spruce mt-4 text-center font-bold">
+              $1 plants a tree
+            </p>
+            <div>
+              <form>
+                <div class="flex flex-wrap -mx-1 mt-2">
+                  <div class="w-1/2 px-1 mt-2 block cursor-pointer">
+                    <div
+                      class="donation-amount-label bg-gray-200 border border-gray-400 flex items-center justify-center rounded-md h-12"
+                      data-trees="5">
+                      5 trees
+                    </div>
+                  </div>
+                  <div class="w-1/2 px-1 mt-2 block cursor-pointer">
+                    <div
+                      class="donation-amount-label bg-gray-200 border border-gray-400 flex items-center justify-center rounded-md h-12 active bg-spruce text-white"
+                      data-trees="20">
+                      20 trees
+                    </div>
+                  </div>
+                  <div class="w-1/2 px-1 mt-2 block cursor-pointer">
+                    <div
+                      class="donation-amount-label bg-gray-200 border border-gray-400 flex items-center justify-center rounded-md h-12"
+                      data-trees="50">
+                      50 trees
+                    </div>
+                  </div>
+                  <div class="w-1/2 px-1 mt-2 block cursor-pointer">
+                    <div
+                      class="donation-amount-label bg-gray-200 border border-gray-400 flex items-center justify-center rounded-md h-12"
+                      data-trees="100">
+                      100 trees
+                    </div>
+                  </div>
+                </div>
+                <div class="row align-items-center">
+                  <div class="mt-2 mb-2 flex items-center justify-center">
+                    <input id="otherTreeQuantity" data-trees="" type="text" maxlength="6"
+                      class="form-control px-2 bg-gray-200 border border-gray-400 rounded-md w-full h-12 focus:placeholder-white other-amount"
+                      placeholder="Other amount" />
+                  </div>
+                </div>
+                <div id="invalidAmountMessage" class="invalid-msg d-none">
+                  Please select or enter a valid amount
+                </div>
+                <img src="img/twig-divider.png" class="w-full my-6" />
+                <button id="nextDonationAmountCard" type="submit"
+                  class="w-full px-6 py-4 bg-orange-500 text-white font-black rounded-full mb-4">
+                  Next
+                </button>
+                <p class="text-center text-sm font-bold">
+                  <a href="/crypto"><u>Donate with crypto</u></a>
+                </p>
+              </form>
+            </div>
+          </div>
+          <div id="donorInformationCard" class="checkout hidden d-none">
+            <h3 class="text-center text-spruce text-2xl font-black">
+              Details
+            </h3>
+            <div class="card-body pb-2">
+              <form>
+                <label class="block w-full mt-4 text-xs">
+                  <span class="opacity-75 font-bold uppercase">Display Name</span>
+                  <input id="name" type="text" placeholder="Display Name" maxlength="50" value="" required=""
+                    class="bg-gray-200 appearance-none mt-1 border border-gray-400 rounded-md p-2 py-3 w-full" />
+                  <div id="nameMissingMessage"
+                    class="invalid-msg font-regular text-sm font-medium mt-2 text-sunset d-none">
+                    Please enter a display name
+                  </div>
+                </label>
+                <label class="block w-full mt-6 text-xs">
+                  <span class="opacity-75 font-bold uppercase">Email address</span>
+                  <input id="email" type="email" placeholder="Email" maxlength="80" value="" required=""
+                    class="bg-gray-200 appearance-none mt-1 border border-gray-400 rounded-md p-2 py-3 w-full" />
+                  <div id="emailMissingMessage"
+                    class="invalid-msg font-regular text-sm font-medium mt-2 text-sunset d-none">
+                    Please enter an email
+                  </div>
+                  <div id="emailInvalidMessage"
+                    class="invalid-msg font-regular text-sm font-medium mt-2 text-sunset d-none">
+                    Please enter a valid email
+                  </div>
+                </label>
+                <label class="block w-full mt-8 text-xs">
+                  <span class="opacity-75 font-bold uppercase">Mobile Phone</span>
+                  <input id="mobilePhone" type="tel" placeholder="Mobile Phone" maxlength="20"
+                    class="bg-gray-200 appearance-none mt-1 border border-gray-400 rounded-md p-2 py-3 w-full" />
+                  <small class="text-sm text-gray-700">optional; by entering a phone number, you consent to
+                    receive text messages</small>
+                </label>
+                <label class="block w-full mt-8 text-xs">
+                  <span class="opacity-75 font-bold uppercase">Team</span>
+                  <div class="relative">
+                    <input id="donationTeam" autocomplete="off" type="text" placeholder="Team name" maxlength="50"
+                      class="bg-gray-200 appearance-none mt-1 border border-gray-400 rounded-md p-2 py-3 w-full" />
+                    <div id="typeahead-results"
+                      class="absolute left-0 w-full mt-1 bg-white rounded shadow-md p-4 z-50 hidden" style="top: 100%">
+                      <p class="placeholder text-center text-xs">
+                        Type a team name to search
+                      </p>
+                      <div id="typeahead-results__results"></div>
+                    </div>
+                  </div>
+                  <small class="text-sm text-gray-700">optional</small>
+                </label>
+                <label class="block w-full mt-8 text-xs">
+                  <span class="opacity-75 font-bold uppercase">Message</span>
+                  <textarea id="message" rows="2" maxlength="40" placeholder="My #TeamTrees message is…"
+                    class="bg-gray-200 appearance-none mt-1 border border-gray-400 rounded-md p-2 py-3 w-full"></textarea>
+                  <small class="text-sm text-gray-700">optional; for display on the website</small>
+                </label>
+                <div class="form-group mt-8">
+                  <input id="optInForUpdates" class="form-check-input mr-2" type="checkbox" />
+                  <label class="form-check-label font-medium" for="optInForUpdates">
+                    <span class="font-bold text-fern">YES!</span> I want
+                    periodic updates on #TeamTrees
+                  </label>
+                </div>
+                <div class="form-group mt-4">
+                  <input id="optOutRecentDonations" class="form-check-input mr-2" type="checkbox" />
+                  <label class="form-check-label font-medium" for="optOutRecentDonations">
+                    Please keep my donation anonymous
+                  </label>
+                </div>
+                <div class="form-group mt-4">
+                  <input id="isGift" class="form-check-input mr-2" type="checkbox" />
+                  <label class="form-check-label medium" for="isGift">
+                    <img class="icon heart w-4 h-4 inline" src="img/icon-heart.svg" />&nbsp;My donation is a gift for
+                    someone
+                  </label>
+                  <small class="form-text text-muted">We’ll send a certificate to your email address, which you
+                    can forward along or print.
+                    <a id="gift-sample-link" style="text-decoration: underline" target='_"blank"' data-toggle="modal"
+                      data-target="#gift-sample">(here’s an example)</a></small>
+                </div>
+                <img src="img/twig-divider.png" class="w-full my-6 d-none gift-info" />
+                <label class="w-full mt-8 text-xs gift-info block d-none">
+                  <span class="opacity-75 font-bold uppercase">To</span>
+                  <input id="giftRecipient" type="text" placeholder="Enter recipient name or nickname..." maxlength="50"
+                    required=""
+                    class="bg-gray-200 appearance-none mt-1 border border-gray-400 rounded-md p-2 py-3 w-full" />
+                  <div id="giftRecipientMissingMessage"
+                    class="invalid-msg font-regular text-sm font-medium mt-2 text-sunset d-none">
+                    Please enter the gift recipient’s name
+                  </div>
+                </label>
+                <label class="w-full mt-8 text-xs gift-info block d-none">
+                  <span class="opacity-75 font-bold uppercase">From</span>
+                  <input id="giftSender" type="text" placeholder="Sender name or nickname..." maxlength="50" required=""
+                    class="bg-gray-200 appearance-none mt-1 border border-gray-400 rounded-md p-2 py-3 w-full" />
+                  <div id="giftSenderMissingMessage"
+                    class="invalid-msg font-regular text-sm font-medium mt-2 text-sunset d-none">
+                    Please enter who this gift is from
+                  </div>
+                </label>
+                <label class="block w-full mt-8 text-xs d-none gift-info">
+                  <span class="opacity-75 font-bold uppercase">Include a gift message</span>
+                  <textarea id="giftMessage" rows="2" maxlength="40" placeholder="My #TeamTrees message is…"
+                    class="bg-gray-200 appearance-none mt-1 border border-gray-400 rounded-md p-2 py-3 w-full"></textarea>
+                  <small class="text-sm text-gray-700">optional; to be included on your certificate</small>
+                </label>
+                <img src="img/twig-divider.png" class="w-full my-6" />
+                <button id="nextDonorInformationCard" type="submit"
+                  class="w-full px-6 py-4 bg-orange-500 text-white font-black rounded-full">
+                  Next Step
+                </button>
+                <button id="prevDonorInformationCard" type="button"
+                  class="w-full px-6 py-2 mt-2 text-gray-700 text-center text-sm font-bold">
+                  Previous
+                </button>
+              </form>
+            </div>
+          </div>
+          <div id="paymentCard" class="checkout hidden d-none">
+            <h3 class="text-center text-spruce text-2xl font-black">
+              Payment
+            </h3>
+            <div class="mt-4">
+              <ul class="nav nav-tabs flex flex-row flex-wrap items-center justify-start" id="paymentTabNavigation"
+                role="tablist">
+                <!-- <li id="cardConnectTabNav" class="flex-auto flex items-stretch w-1/2 mb-4" style="min-width: 7rem">
+                  <a class="nav-link active" data-toggle="tab" href="#cardConnectTab" role="tab" aria-controls="card"
+                    aria-selected="true">Card</a>
+                </li> -->
+                <li id="brainTreeTabNav" class="flex-auto flex items-center justify-center w-full">
+                  <a class="nav-link flex flex-wrap items-center justify-center flex-1" data-toggle="tab"
+                    href="#brainTreeTab" role="tab" aria-controls="otherPaymentOptions" aria-selected="false">
+                    <img src="images/logo-paypal-color-landscape.png" alt="" class="paypal-thumb flex-1 px-2 py-2" />
+                    <img src="images/logo-apple-pay-color-landscape.png" alt="" class="apple-pay-thumb px-2 py-2" />
+                    <img src="images/logo-venmo-color-landscape.png" alt="" class="venmo-thumb px-2 py-2" />
+                  </a>
+                </li>
+                <div class="flex-auto"></div>
+              </ul>
+              <div class="tab-content" id="paymentMethodTabs">
+                <div class="tab-pane fade show active" id="cardConnectTab" role="tabpanel" aria-labelledby="card-tab">
+                  <form>
+                    <label class="block w-full mt-4 text-xs">
+                      <span class="opacity-75 font-bold uppercase">Cardholder Name</span>
+                      <input id="cardConnectCardholderName" type="text" placeholder="Cardholder Name" maxlength="30"
+                        required=""
+                        class="bg-gray-200 appearance-none mt-1 border border-gray-400 rounded-md p-2 py-3 w-full" />
+                      <div id="cardConnectCardholderNameMissingMessage"
+                        class="invalid-msg font-regular text-sm font-medium mt-2 text-sunset d-none">
+                        Enter a cardholder name
+                      </div>
+                    </label>
+                    <label class="block w-full mt-4 text-xs">
+                      <span class="opacity-75 font-bold uppercase">Card Number</span>
+                      <input type="hidden" id="cardConnectToken" required="" />
+                      <iframe style="
+                            width: 100%;
+                            height: 44px;
+                            border: 0;
+                            padding: 0;
+                          " scrolling="no"
+                        src="https://fts.cardconnect.com/itoke/ajax-tokenizer.html?enhancedresponse=true&amp;tokenizewheninactive=true&amp;inactivityto=500&amp;invalidinputevent=true&amp;css=html%2Cbody%2Cform%7Bmargin%3A0%3Bpadding%3A0%3B%7Dinput%7Bdisplay%3Ablock%3Bwidth%3A100%25%3Bpadding%3A.5rem%20.75rem%3Bmargin%3A0%3Bbackground%3A%23edf2f7%3Bborder-radius%3A.25rem%3Bborder%3A1px%20solid%20%23ced4da%3Bbox-sizing%3Aborder-box%3Bfont-size%3A1rem%3Bfont-weight%3A400%3Bline-height%3A1.5%3Bcolor%3A%23495057%3B%7D%3A%3Aplaceholder%7Bcolor%3Ablue%7D"></iframe>
+                      <div id="cardConnectInvalidCardNumberMessage"
+                        class="invalid-msg font-regular text-sm font-medium mt-2 text-sunset d-none">
+                        Invalid Account Number
+                      </div>
+                    </label>
+                    <label for="cardConnectExpiryMonth"
+                      class="block text-xs opacity-75 font-bold uppercase mt-4">Expiration date</label>
+                    <div class="flex flex-row items-center">
+                      <div class="flex-1 pr-4">
+                        <select id="cardConnectExpiryMonth"
+                          class="form-control w-full border border-gray-400 rounded-md px-3 py-2 bg-gray-200"
+                          required="">
+                          <option value="" selected=""></option>
+                          <option value="01">01</option>
+                          <option value="02">02</option>
+                        </select>
+                        <div id="cardConnectExpiryMonthMissingMessage" class="invalid-msg d-none">
+                          Select a month
+                        </div>
+                      </div>
+                      <div class="flex-1">
+                        <select id="cardConnectExpiryYear"
+                          class="form-control w-full border border-gray-400 rounded-md px-3 py-2 bg-gray-200"
+                          required="">
+                          <option value="" selected=""></option>
+                          <option value="19">2019</option>
+                          <option value="20">2020</option>
+                        </select>
+                        <div id="cardConnectExpiryYearMissingMessage" class="invalid-msg d-none">
+                          Select a year
+                        </div>
+                      </div>
+                    </div>
+                    <label class="block w-full mt-4 text-xs">
+                      <span class="opacity-75 font-bold uppercase">Security Code</span>
+                      <input id="cardConnectCvv2" type="text" placeholder="Security Code" maxlength="4" required=""
+                        class="bg-gray-200 appearance-none mt-1 border border-gray-400 rounded-md p-2 py-3 w-full" />
+                      <div id="cardConnectCvv2MissingMessage"
+                        class="invalid-msg font-regular text-sm font-medium mt-2 text-sunset d-none">
+                        Enter a security code
+                      </div>
+                    </label>
+                    <label class="block w-full mt-4 text-xs">
+                      <span class="opacity-75 font-bold uppercase">Postal Code</span>
+                      <input id="cardConnectPostalCode" type="text" placeholder="Postal Code" maxlength="9" required=""
+                        class="bg-gray-200 appearance-none mt-1 border border-gray-400 rounded-md p-2 py-3 w-full" />
+                      <div id="cardConnectPostalCodeMissingMessage"
+                        class="invalid-msg font-regular text-sm font-medium mt-2 text-sunset d-none">
+                        Enter a postal code
+                      </div>
+                    </label>
+                    <div class="form-group mt-4">
+                      <label for="cardConnectCountryCode"
+                        class="block text-xs opacity-75 font-bold uppercase">Country</label>
+                      <select id="cardConnectCountryCode"
+                        class="form-control w-full border border-gray-400 rounded-md px-3 py-2 bg-gray-200" required="">
+                        <option value="US" selected="">United States</option>
+                        <option disabled="">──────────</option>
+                      </select>
+                      <div id="cardConnectCountryCodeMissingMessage"
+                        class="invalid-msg font-regular text-sm font-medium mt-2 text-sunset d-none">
+                        Select a country
+                      </div>
+                    </div>
+                    <img src="img/twig-divider.png" class="w-full my-6" />
+                    <div class="row justify-content-center mt-2">
+                      <div class="flex flex-col items-center">
+                        <img src="/img/donation-leaves.png" class="w-3/4" />
+                        <h2 class="total-donation font-black text-3xl text-spruce -mt-6">
+                          $XX
+                        </h2>
+                        <h6 class="mt-2 font-medium">USD Donation</h6>
+                      </div>
+                      <div id="cardConnectErrorMessage" class="invalid-msg mb-3 d-none"></div>
+                      <div class="form-group mt-8">
+                        <button id="cardConnectDonateNow" type="submit"
+                          class="w-full px-6 py-4 bg-orange-500 text-white font-black rounded-full flex flex-row items-center justify-center">
+                          <img class="loading inline h-6 mr-2 d-none" src="img/loading.svg" />
+                          Complete Donation
+                        </button>
+                        <p class="text-center text-sm text-gray-700 mt-4">
+                          This site is protected by reCAPTCHA and the Google
+                          <a target="blank" href="https://policies.google.com/privacy">Privacy Policy</a>
+                          and
+                          <a target="blank" href="https://policies.google.com/terms">Terms of Service</a>
+                          apply.
+                        </p>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="tab-pane fade" id="brainTreeTab" role="tabpanel" aria-labelledby="otherPaymentOptions-tab">
+                  <div class="container py-3">
+                    <div id="dropin-wrapper">
+                      <div id="dropin-container"></div>
+                    </div>
+                    <img src="img/twig-divider.png" class="w-full my-6" />
+
+                  </div>
+                </div>
+              </div>
+              <div id="v2recaptchaMessage" class="invalid-msg d-none mb-4">
+                Please complete the verification below to complete your
+                donation
+              </div>
+              <div class="d-flex justify-content-center">
+                <div id="v2recaptcha"></div>
+              </div>
+              <button id="prevPaymentCard" type="button"
+                class="w-full px-6 py-2 mt-2 text-gray-700 text-center text-sm font-bold">
+                Previous
+              </button>
+            </div>
+          </div>
+          <div id="donationCompleteCard" class="hidden d-none">
+            <h3 class="text-center text-spruce text-2xl font-black">
+              Thank You
+            </h3>
+            <div class="mt-4">
+              <h5 class="text-center text-spruce font-bold">
+                You’re a good human and are now officially a member of
+                #TeamTrees!
+              </h5>
+              <p class="text-center mt-2">
+                Together, we’re planting millions of trees!
+                <br class="d-none d-lg-block d-xl-block" />
+                If you know any other good humans, use your favorite social
+                platforms and invite them to join the team too!
+              </p>
+              <div class="alert text-center d-none alert-winter gift-info mr-2" role="alert">
+                <img class="icon heart w-8 h-8 inline-block mr-2" src="images/icon-heart.svg" />&nbsp;If you gave your
+                trees as a gift, please check your
+                inbox for the certificate to share!
+              </div>
+              <div id="easyScreenShot" style="
+                    background-color: #f3f4f6;
+                    box-shadow: 6px 6px 0px #113259;
+                  " class="relative border-2 border-spruce rounded-lg mt-16 p-4">
+                <div class="absolute top-0 left-0 right-0 flex flex-row items-center justify-center">
+                  <div class="w-20 h-20 -mt-10 flex items-center justify-center">
+                    <span id="easyScreenShotBadge"></span>
+                  </div>
+                </div>
+                <div class="screenshot-body pt-12">
+                  <div class="media">
+                    <p class="media-body text-center">
+                      <strong id="easyScreenShotTeam" class="hidden font-black text-lightMoss uppercase text-xs">Team
+                        name</strong><br />
+                      <strong id="easyScreenShotName" class="font-black text-spruce text-lg">First Lastname</strong>
+                      <span id="easyScreenShotMessage" class="block medium mb-4">dude, arent trees the best?</span>
+                      <span id="easyScreenShotTreeCountBadge"
+                        class="px-3 py-1 bg-lightMoss rounded-full mt-2 text-white font-bold"></span><br />
+                      <span id="easyScreenShotDate" class="feed-datetime block text-xs text-gray-700 mt-2">Invalid
+                        Date</span><br />
+                    </p>
+                  </div>
+                  <div class="h-px bg-gray-400 w-full mt-0"></div>
+                  <div class="counter-wrap relative mt-24">
+                    <div class="absolute top-0 left-0 w-full -mt-12 md:-mt-16 p-8">
+                      <img src="img/completion-leaves.png" class="absolute inset-0" />
+                    </div>
+                    <div id="easyScreenShotCounter" class="counter text-4xl font-black text-spruce text-center"
+                      data-count="24744410">
+                      24,744,410
+                    </div>
+                    <div class="measure-wrap text-center mt-2">
+                      <span class="text-uppercase letter-spacing text-center">Trees Planted</span>
+                      <img class="counter-underline w-1/3 pt-2 mx-auto" src="images/counter-underline-blue.svg" />
+                    </div>
+                  </div>
+                  <p class="dollar-plants-tree text-center text-spruce mt-2 font-bold">
+                    Every dollar plants one tree
+                  </p>
+                </div>
+              </div>
+              <div id="thankYouTeam" class="hidden flex flex-col items-center justify-center mt-12">
+                <p class="text-center">
+                  You just joined the team
+                  <span id="thankYouTeamName" class="text-spruce font-bold">Archrival</span>! <br />Copy the link below
+                  to share your team.
+                </p>
+                <div class="flex flex-row bg-gray-100 rounded border border-gray-500 w-full mx-2 mt-4">
+                  <input readonly="" type="text" id="thankYouTeamURL"
+                    class="block flex-1 overflow-hidden outline-none overflow-clip p-2 whitespace-no-wrap"
+                    value="https://teamtrees.org/search?q=Archrival" />
+                  <div id="thankYouTeamCopy" class="p-2 bg-white border-l rounded cursor-pointer">
+                    Copy
+                  </div>
+                </div>
+              </div>
+              <p class="text-center mt-8">
+                Take a screenshot, share it on social, and tag 3 friends to
+                join #TeamTrees
+              </p>
+              <div class="text-center mt-8 flex flex-col items-stretch">
+                <div class="overflow-hidden rounded-full sp_200629 sp_fb_large"></div>
+                <div class="overflow-hidden rounded-full mt-2 sp_200860 sp_tw_large"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-screen-sm mx-auto px-2 md:px-4 mt-32">
+      <div class="planting-meter-callout">
+        <img src="" alt="" />
+        <a href="#planting-projects">
+          <div class="bg-green-gradient rounded-full p-4 mt-4 mx-0 md:mx-12 text-center" role="alert">
+            <p class="text-white text-xs md:text-sm uppercase tracking-wide">
+              <img src="img/icon-check-round.png" class="mr-1 md:mr-2 inline-block w-4 h-4 md:w-6 md:h-6" />
+              20 Million+ Trees are in the Ground
+              <span
+                class="bg-white bg-opacity-25 rounded-full px-2 md:px-3 py-1 ml-1 md:ml-2 align-middle inline-block"><img
+                  src="img/arrow-right-light-landscape.png" class="inline-block w-6 md:w-8 right-arrow" /></span>
+            </p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div id="leaderboard" class="mx-auto mt-16">
+      <h3 class="text-spruce text-3xl md:text-6xl font-black text-center uppercase">
+        Leaderboard
+      </h3>
+      <div class="flex flex-col md:flex-row items-center justify-center w-full max-w-xl px-4 mx-auto mt-8">
+        <a href="/search" class="flex flex-row items-center bg-white shadow-lg rounded-full py-2 px-6 mr-0 md:mr-4">
+          <span class="text-spruce text-center font-bold text-sm mr-4 uppercase">
+            Search
+          </span>
+          <img src="img/search.png" />
+        </a>
+        <div class="relative flex flex-row items-center rounded-full mt-4 md:mt-0"
+          style="background: rgba(0, 0, 0, 0.05)">
+          <p id="choose-recents"
+            class="cursor-pointer uppercase px-4 py-2 rounded-full text-sm font-bold bg-white shadow-lg text-spruce">
+            Most Recent
+          </p>
+          <p id="choose-leaderboard"
+            class="cursor-pointer uppercase px-4 py-2 rounded-full text-sm font-bold text-gray-700">
+            Most Trees
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="relative overflow-hidden md:overflow-visible px-2 md:px-4 max-w-screen-sm w-full mx-auto">
+      <img src="img/cloud-small.png" class="parallax-slow w-12 absolute top-0 right-0 mt-8 -mr-2"
+        style="transform: translateY(-20.3562px)" />
+      <img src="/img/leaf-2.png" class="parallax-med absolute z-20 w-12 top-0 right-0 -mr-4 mt-40"
+        style="transform: translateY(-50.9506px)" />
+      <img src="img/cloud-small.png" class="parallax-slow w-12 absolute bottom-0 left-0 mb-48 -ml-24"
+        style="transform: translateY(-189.993px)" />
+
+      <div id="recents" class="mt-12">
+        <div id="recent-donations" class="max-w-screen-sm w-full mx-auto">
+          <div class="w-full bg-white shadow rounded-md relative mt-4 flex flex-row isGift">
+            <div
+              class="relative md:absolute top-0 bottom-0 left-0 flex py-4 items-start md:items-center justify-center ml-4 md:-ml-8">
+              <img src="img/icon-badge-grove-2.svg" class="w-12 md:h-16 md:w-16" />
+            </div>
+            <div class="w-full flex flex-col md:flex-row items-start md:items-center pl-4 md:pl-12 py-2">
+              <div class="flex-1">
+                <p class="text-lightMoss font-bold text-xs uppercase"></p>
+                <p class="text-spruce font-black text-lg">EMILY CHARNOCK</p>
+                <p class="text-spruce"></p>
+              </div>
+              <div class="flex flex-col items-start md:items-end pr-4">
+                <div class="mt-0 md:mt-4 bg-lightMoss rounded-full text-white text-bold px-4 relative badge">
+                  106 trees
+                </div>
+                <p class="text-center text-xs mt-2 opacity-50 feed-datetime">
+                  6/14/2024, 11:37:45 PM
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="w-full bg-white shadow rounded-md relative mt-4 flex flex-row">
+            <div
+              class="relative md:absolute top-0 bottom-0 left-0 flex py-4 items-start md:items-center justify-center ml-4 md:-ml-8">
+              <img src="img/icon-badge-grove-2.svg" class="w-12 md:h-16 md:w-16" />
+            </div>
+            <div class="w-full flex flex-col md:flex-row items-start md:items-center pl-4 md:pl-12 py-2">
+              <div class="flex-1">
+                <p class="text-lightMoss font-bold text-xs uppercase">
+                  GAIAS2050.COM
+                </p>
+                <p class="text-spruce font-black text-lg">
+                  GAIAS 100% BAMBOO TOILET PAPER
+                </p>
+                <p class="text-spruce">
+                  #GaiaSustainability donation w/ purchase
+                </p>
+              </div>
+              <div class="flex flex-col items-start md:items-end pr-4">
+                <div class="mt-0 md:mt-4 bg-lightMoss rounded-full text-white text-bold px-4 relative badge">
+                  1 tree
+                </div>
+                <p class="text-center text-xs mt-2 opacity-50 feed-datetime">
+                  6/14/2024, 11:20:57 PM
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="w-full bg-white shadow rounded-md relative mt-4 flex flex-row">
+            <div
+              class="relative md:absolute top-0 bottom-0 left-0 flex py-4 items-start md:items-center justify-center ml-4 md:-ml-8">
+              <img src="img/icon-badge-grove-2.svg" class="w-12 md:h-16 md:w-16" />
+            </div>
+            <div class="w-full flex flex-col md:flex-row items-start md:items-center pl-4 md:pl-12 py-2">
+              <div class="flex-1">
+                <p class="text-lightMoss font-bold text-xs uppercase">
+                  M&amp;M
+                </p>
+                <p class="text-spruce font-black text-lg">
+                  Michelle &amp; Maria
+                </p>
+                <p class="text-spruce">Beautiful</p>
+              </div>
+              <div class="flex flex-col items-start md:items-end pr-4">
+                <div class="mt-0 md:mt-4 bg-lightMoss rounded-full text-white text-bold px-4 relative badge">
+                  2 trees
+                </div>
+                <p class="text-center text-xs mt-2 opacity-50 feed-datetime">
+                  6/14/2024, 11:00:23 PM
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full max-w-screen-sm mx-auto mt-12 flex flex-col md:flex-row">
+          <a href="#donate"
+            class="w-full text-center px-6 py-4 bg-orange-500 text-white font-black rounded-full mx-0 md:mx-4">Add Your
+            Tree</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="planting-projects">
+    <img src="img/blue-curve.png" class="w-full bg-[#b4dbe1]" />
+    <div class="bg-[#113259] py-24 overflow-hidden">
+      <h3 class="text-white text-3xl md:text-6xl font-black text-center uppercase">
+        Planting Projects
+      </h3>
+      <p class="text-center text-white max-w-screen-sm mx-auto px-4">
+        Where are these millions of trees being planted? All over the world,
+        thanks to our partnership with the
+        <a href="https://www.arborday.org/" class="underline" target="_blank">Arbor Day Foundation</a>!
+      </p>
+      <div class="flex-1 flex items-center justify-center my-5">
+        <a href="https://www.arborday.org/" class="cursor-pointer" target="_blank"><img
+            src="img/logo-arbor-day-foundation-light.png" class="w-64" /></a>
+      </div>
+      <div class="max-w-screen-sm mx-auto px-3 md:px-4 mt-12">
+        <div class="bg-[#518360] rounded-3xl px-4 md:px-10 py-4 mt-4">
+          <div class="flex flex-wrap">
+            <div class="w-1/3 md:w-1/4 text-center">
+              <img src="img/tree-group-alt.png" class="inline-block -mt-8 md:-mt-12 md:px-3" />
+            </div>
+            <div class="w-2/3 md:w-3/4 pl-2 md:pl-4">
+              <h2 class="font-black text-white text-lg md:text-2xl mt-3 md:mt-0 tracking-wide">
+                Trees in the Ground
+              </h2>
+              <div class="bg-black bg-opacity-25 rounded-full px-2 py-1 rounded-full inline-block">
+                <p class="text-white text-xxs md:text-xs uppercase tracking md:tracking-widest">
+                  20 million+ / 24 million
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="px-4 mt-3 md:mt-5">
+            <img src="img/tree-progress-20-of-24-mil-large-screens.png" class="hidden md:block" />
+            <img src="img/tree-progress-20-of-24-mil-small-screens.png" class="block md:hidden pr-8" />
+            <p>
+              <a style="border-bottom: 1px solid #fff; padding-bottom: 3px" href="#planting-locations"
+                class="mt-4 mb-2 text-white text-xs md:text-sm inline-block">Check out our updated planting locations
+                <img src="img/arrow-right-light.png" class="w-4 inline-block" /></a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="w-full max-w-sm mx-auto p-8 md:p-12">
+        <div class="bg-[#6fba0d] rounded-full p-4 relative">
+          <div class="flex flex-wrap items-center">
+            <div class="w-1/3 pl-10 md:pl-6 text-center">
+              <img src="img/trophy-check-animated.gif" class="" />
+            </div>
+            <div class="w-2/3 pl-4 pr-10 md:pr-6">
+              <p class="text-white text-sm">
+                20 million trees are in the ground!
+              </p>
+              <img src="img/sparkle.png" class="w-3 achieve-sparkle" />
+            </div>
+          </div>
+          <div class="bg-[#dc582a] inline-block px-3 py-1 rounded-full -mt-3 text-right achieve-goal">
+            <p class="text-white text-xxs uppercase tracking-wider">
+              Original Goal Met
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-row max-w-screen-md px-4 mx-auto items-center justify-center">
+        <div
+          class="planting-scroll-left hidden md:flex cursor-pointer select-none bg-white w-12 h-12 rounded-full shadow-md items-center justify-center"
+          style="">
+          <img src="img/arrow-right.png" class="w-6 transform rotate-180" />
+        </div>
+        <div class="relative mx-auto mt-16" style="width: 40vh">
+          <div class="relative" style="padding-bottom: 100%">
+            <div class="absolute globe-glow" style="width: 120%; height: 120%; left: -10%; top: -10%"></div>
+            <div class="absolute w-full h-full rounded-full overflow-hidden bg-sky"
+              style="-webkit-mask: -webkit-radial-gradient(white, black)">
+              <div id="planting-map"
+                class="bg-sky absolute left-0 top-0 h-full transition transition-transform duration-200"
+                style="width: 200%; transform: translateX(-30vh)">
+                <div class="absolute left-0 top-0 h-full w-full" style="
+                      background-image: url(img/world-map.png);
+                      background-position: 0px center;
+                      background-size: 100% 100%;
+                    "></div>
+                <a href="#north-america">
+                  <div
+                    class="cursor-pointer select-none absolute z-30 bg-white text-sm font-bold rounded-full px-4 py-2"
+                    style="left: 3vh; top: 10vh">
+                    North America
+                  </div>
+                </a>
+                <a href="#south-america">
+                  <div
+                    class="cursor-pointer select-none absolute z-30 bg-white text-sm font-bold rounded-full px-4 py-2"
+                    style="left: 10vh; top: 24vh">
+                    South America
+                  </div>
+                </a>
+                <a href="#africa">
+                  <div
+                    class="cursor-pointer select-none absolute z-30 bg-white text-sm font-bold rounded-full px-4 py-2"
+                    style="left: 33vh; top: 19vh">
+                    Africa
+                  </div>
+                </a>
+                <a href="#europe">
+                  <div
+                    class="cursor-pointer select-none absolute z-30 bg-white text-sm font-bold rounded-full px-4 py-2"
+                    style="left: 32vh; top: 10vh">
+                    Europe
+                  </div>
+                </a>
+                <a href="#asia">
+                  <div
+                    class="cursor-pointer select-none absolute z-30 bg-white text-sm font-bold rounded-full px-4 py-2"
+                    style="left: 55vh; top: 9vh">
+                    Asia
+                  </div>
+                </a>
+                <a href="#australia">
+                  <div
+                    class="cursor-pointer select-none absolute z-30 bg-white text-sm font-bold rounded-full px-4 py-2"
+                    style="left: 57vh; top: 27vh">
+                    Australia
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <img src="img/rocket.png" class="absolute left-0 top-0 w-8" />
+        </div>
+        <div
+          class="planting-scroll-right hidden md:flex cursor-pointer select-none bg-white w-12 h-12 rounded-full shadow-md items-center justify-center"
+          style="">
+          <img src="img/arrow-right.png" class="w-6" />
+        </div>
+      </div>
+
+      <div class="flex md:hidden items-center justify-center mt-16">
+        <div
+          class="planting-scroll-left flex cursor-pointer select-none bg-white w-12 h-12 mx-2 rounded-full shadow-md items-center justify-center"
+          style="">
+          <img src="img/arrow-right.png" class="w-6 transform rotate-180" />
+        </div>
+        <div
+          class="planting-scroll-right flex cursor-pointer select-none bg-white w-12 h-12 mx-2 rounded-full shadow-md items-center justify-center"
+          style="">
+          <img src="img/arrow-right.png" class="w-6" />
+        </div>
+      </div>
+
+      <div id="planting-locations" class="w-full max-w-screen-lg mx-auto px-4 mt-12">
+        <div id="asia" class="mt-16">
+          <h3 class="text-white text-xl font-bold uppercase">Asia</h3>
+          <div class="flex flex-row flex-wrap">
+            <div class="flex flex-col w-full lg:w-1/2 px-0 lg:px-2">
+              <div class="relative bg-white rounded p-4 flex flex-col items-start mt-4">
+                <div class="absolute w-20 h-20 -mt-8 -mr-6 top-0 right-0 flex items-center justify-center">
+                  <img src="/img/badge.png" class="absolute z-20 inset-0 object-contain" />
+                  <p class="font-bold text-white text-xxs relative z-30 text-center uppercase">
+                    complete
+                  </p>
+                </div>
+                <p class="text-lg font-black text-spruce">China</p>
+                <div class="bg-fern px-2 py-1 rounded-full mt-2">
+                  <p class="text-white text-bold text-sm uppercase">
+                    25,000 trees
+                  </p>
+                </div>
+                <p class="mt-4">
+                  China is one of the most affected countries in the world by
+                  desertification. In Minquin County alone, the
+                  desertification area accounts for nearly 95% of the total
+                  land area. As the young workforce leaves for an urban life,
+                  local residents face the reality of becoming ecological
+                  refugees. By planting indigenous trees, stabilizing sand
+                  dunes, training local community members and creating job
+                  opportunities, the fate of Minquin County can be improved
+                  significantly.
+                </p>
+              </div>
+            </div>
+            <div class="flex flex-col w-full lg:w-1/2 px-0 lg:px-2">
+              <div class="relative bg-white rounded p-4 flex flex-col items-start mt-4">
+                <div class="absolute w-20 h-20 -mt-8 -mr-6 top-0 right-0 flex items-center justify-center">
+                  <img src="/img/badge.png" class="absolute z-20 inset-0 object-contain" />
+                  <p class="font-bold text-white text-xxs relative z-30 text-center uppercase">
+                    complete
+                  </p>
+                </div>
+                <p class="text-lg font-black text-spruce">China</p>
+                <p class="text-sm text-spruce">Liaoning Province</p>
+                <div class="bg-fern px-2 py-1 rounded-full mt-2">
+                  <p class="text-white text-bold text-sm uppercase">
+                    45,000 trees
+                  </p>
+                </div>
+                <p class="mt-4">
+                  Tree planting efforts are underway near the city of Gaizhou,
+                  China. The area currently has some forest cover, but it is
+                  in poor condition, which has led to soil depletion and
+                  erosion. New trees are needed to reverse those conditions,
+                  restore habitat for wildlife, and bring back a beautiful
+                  outdoor space for the people of Gaizhou to enjoy. This
+                  evolution in the ecosystem will also contribute to promoting
+                  social stability and sustainable economic development.
+                </p>
+              </div>
+            </div>
+            <div class="flex flex-col w-full lg:w-1/2 px-0 lg:px-2">
+              <div class="relative bg-white rounded p-4 flex flex-col items-start mt-4">
+                <div class="absolute w-20 h-20 -mt-8 -mr-6 top-0 right-0 flex items-center justify-center">
+                  <img src="/img/badge.png" class="absolute z-20 inset-0 object-contain" />
+                  <p class="font-bold text-white text-xxs relative z-30 text-center uppercase">
+                    complete
+                  </p>
+                </div>
+                <p class="text-lg font-black text-spruce">India</p>
+                <div class="bg-fern px-2 py-1 rounded-full mt-2">
+                  <p class="text-white text-bold text-sm uppercase">
+                    905,439 trees
+                  </p>
+                </div>
+                <p class="mt-4">
+                  Southern India’s Cauvery River Basin is in crisis. The river
+                  has shrunk by an estimated 40% from its historical flows
+                  over 70 years. This is resulting in drinking water scarcity.
+                  A loss of tree cover has also contributed to poor soil
+                  health. Reforesting this river basin and educating farmers
+                  about agroforestry practices will help to stabilize the
+                  river and improve soil conditions over time.
+                </p>
+              </div>
+            </div>
+            <div class="flex flex-col w-full lg:w-1/2 px-0 lg:px-2">
+              <div class="relative bg-white rounded p-4 flex flex-col items-start mt-4">
+                <div class="absolute w-20 h-20 -mt-8 -mr-6 top-0 right-0 flex items-center justify-center">
+                  <img src="/img/badge.png" class="absolute z-20 inset-0 object-contain" />
+                  <p class="font-bold text-white text-xxs relative z-30 text-center uppercase">
+                    complete
+                  </p>
+                </div>
+                <p class="text-lg font-black text-spruce">Indonesia</p>
+                <div class="bg-fern px-2 py-1 rounded-full mt-2">
+                  <p class="text-white text-bold text-sm uppercase">
+                    450,000 trees
+                  </p>
+                </div>
+                <p class="mt-4">
+                  West Papua, Indonesia, situated in the Coral Triangle, is an
+                  area recognized as the global center of marine biodiversity
+                  and a global priority for conservation. Biak Island is one
+                  of the poorest areas of Indonesia where subsistence farmers
+                  and fishers make up approximately 75% of the population.
+                  This project will focus on restoring mangroves and tropical
+                  forests in this area and to promote food security by helping
+                  local people plant agroforestry trees.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="australia" class="mt-16">
+          <h3 class="text-white text-xl font-bold uppercase">Australia</h3>
+          <div class="flex flex-row flex-wrap">
+            <div class="flex flex-col w-full lg:w-1/2 px-0 lg:px-2">
+              <div class="relative bg-white rounded p-4 flex flex-col items-start mt-4">
+                <div class="absolute w-20 h-20 -mt-8 -mr-6 top-0 right-0 flex items-center justify-center">
+                  <img src="/img/badge.png" class="absolute z-20 inset-0 object-contain" />
+                  <p class="font-bold text-white text-xxs relative z-30 text-center uppercase">
+                    complete
+                  </p>
+                </div>
+                <p class="text-lg font-black text-spruce">
+                  Central and Northern Victoria
+                </p>
+                <div class="bg-fern px-2 py-1 rounded-full mt-2">
+                  <p class="text-white text-bold text-sm uppercase">
+                    75,000 trees
+                  </p>
+                </div>
+                <p class="mt-4">
+                  Over the years, this area has faced a tremendous amount of
+                  deforestation due to various industries and rapid population
+                  growth. The result is very fragmented forestland that is
+                  struggling to support area wildlife. Replanting efforts will
+                  create forested corridors to connect three area National
+                  Parks — providing better habitat for animal species and a
+                  healthier ecosystem overall.
+                </p>
+              </div>
+            </div>
+            <div class="flex flex-col w-full lg:w-1/2 px-0 lg:px-2">
+              <div class="relative bg-white rounded p-4 flex flex-col items-start mt-4">
+                <div class="absolute w-20 h-20 -mt-8 -mr-6 top-0 right-0 flex items-center justify-center">
+                  <img src="/img/badge.png" class="absolute z-20 inset-0 object-contain" />
+                  <p class="font-bold text-white text-xxs relative z-30 text-center uppercase">
+                    complete
+                  </p>
+                </div>
+                <p class="text-lg font-black text-spruce">East Queensland</p>
+                <div class="bg-fern px-2 py-1 rounded-full mt-2">
+                  <p class="text-white text-bold text-sm uppercase">
+                    200,000 trees
+                  </p>
+                </div>
+                <div class="video-preview videoWrapper transform -rotate-1 w-full my-6 rounded-md overflow-hidden"
+                  data-video="https://www.youtube.com/embed/hSmaMkLG5e0">
+                  <img class="rounded-md" src="/img/california.jpg" />
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <img src="/img/play-button.png" />
+                  </div>
+                </div>
+                <p class="mt-4">
+                  Many forested areas in Queensland, Australia have been
+                  cleared for surface mining and agricultural use. Our ongoing
+                  replanting efforts will help protect the area’s rare
+                  wildlife populations, including turtle species, wallabies,
+                  kangaroos, wombats, and koalas, as well as water leading to
+                  the Great Barrier Reef.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="new-zealand" class="mt-16">
+          <h3 class="text-white text-xl font-bold uppercase">New Zealand</h3>
+          <div class="flex flex-row flex-wrap">
+            <div class="flex flex-col w-full lg:w-1/2 px-0 lg:px-2">
+              <div class="relative bg-white rounded p-4 flex flex-col items-start mt-4">
+                <div class="absolute w-20 h-20 -mt-8 -mr-6 top-0 right-0 flex items-center justify-center">
+                  <img src="/img/badge.png" class="absolute z-20 inset-0 object-contain" />
+                  <p class="font-bold text-white text-xxs relative z-30 text-center uppercase">
+                    complete
+                  </p>
+                </div>
+                <p class="text-lg font-black text-spruce">Auckland Council</p>
+                <div class="bg-fern px-2 py-1 rounded-full mt-2">
+                  <p class="text-white text-bold text-sm uppercase">
+                    41,789 trees
+                  </p>
+                </div>
+                <p class="mt-4">
+                  Auckland, New Zealand has a goal to reach 30% tree canopy by
+                  2050. As part of this goal, new trees are being planted
+                  across four different regional sites — Totara Park, Puhinui
+                  Reserve, Hoskin Reserve, and Hunua Domain — in 2022. These
+                  trees will create new, thriving forests for New Zealanders
+                  to enjoy. And they will provide countless benefits —
+                  including cleaner water, cleaner air, greater biodiversity,
+                  and carbon sequestration.
+                </p>
+              </div>
+            </div>
+            <div class="flex flex-col w-full lg:w-1/2 px-0 lg:px-2">
+              <div class="relative bg-white rounded p-4 flex flex-col items-start mt-4">
+                <div class="absolute w-20 h-20 -mt-8 -mr-6 top-0 right-0 flex items-center justify-center">
+                  <img src="/img/badge.png" class="absolute z-20 inset-0 object-contain" />
+                  <p class="font-bold text-white text-xxs relative z-30 text-center uppercase">
+                    complete
+                  </p>
+                </div>
+                <p class="text-lg font-black text-spruce">Te Uru Rakau</p>
+                <div class="bg-fern px-2 py-1 rounded-full mt-2">
+                  <p class="text-white text-bold text-sm uppercase">
+                    32,590 trees
+                  </p>
+                </div>
+                <p class="mt-4">
+                  Project Mahitahi is a collaborative effort aimed at
+                  restoring the terrestrial ecosystem of New Zealand’s
+                  Mahitahi/Maitahi/Maitai valley. The area has great cultural
+                  importance, as well as supports threatened species like the
+                  Nelson green gecko and Kakariki parrot. The new trees
+                  planted through this project will support wildlife,
+                  sequester carbon, improve water quality for the local
+                  community, and create dozens of jobs.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="social-feed">
+      <div class="bg-[#113259] py-32">
+        <h3 class="text-white text-3xl md:text-6xl font-black text-center uppercase">
+          #TeamTrees Social
+        </h3>
+        <div class="flex flex-row items-center justify-center">
+          <a href="https://reddit.com/r/teamtrees" target="_blank" class="relative">
+            <img src="img/reddit-icon.png" class="mx-2 block w-10 h-10" />
+          </a>
+          <a href="https://www.instagram.com/teamtrees/" target="_blank" class="relative">
+            <img src="img/instagram-icon.png" class="mx-2 block w-10 h-10" />
+          </a>
+          <a href="https://twitter.com/teamtreesofficl" target="_blank" class="relative">
+            <img src="img/twitter-icon.png" class="mx-2 block w-10 h-10" />
+          </a>
+          <a href="https://www.facebook.com/teamtreesofficial/" target="_blank" class="relative">
+            <img src="img/facebook-icon.png" class="mx-2 block w-10 h-10" />
+          </a>
+          <a href="https://tiktok.com/@teamtreesofficial" target="_blank" class="relative">
+            <img src="img/tiktok-icon.png" class="mx-2 block w-10 h-10" />
+          </a>
+          <a href="https://www.youtube.com/c/teamtrees" target="_blank" class="relative">
+            <img src="img/youtube-icon.png" class="mx-2 block w-10 h-10" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gradient-to-b bg-[#113259]">
+      <div class="pt-30">
+        <img src="img/footer.png" class="w-full" />
+        <div class="bg-spruce flex flex-col md:flex-row items-center justify-center p-4 md:p-8 -mt-1">
+          <a href="/#FAQ" data-toggle="modal" data-target="#FAQ"
+            class="cursor-pointer block mt-4 md:mt-0 px-4 text-white font-black">FAQ</a>
+          <a href="mailto:info@teamtrees.org" class="block mt-4 md:mt-0 px-4 text-white font-black">Contact Us</a>
+          <a href="mailto:press@teamtrees.org" class="block mt-4 md:mt-0 px-4 text-white font-black">Press Inquiries</a>
+          <a href="https://teamseas.org/" target="_blank"
+            class="block mt-4 md:mt-0 px-4 text-white font-black">#TeamSeas</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div id="video-modal" class="fixed inset-0 bg-spruce flex items-center justify-center d-none" style="z-index: 100">
+      <div class="bg-gradient-to-b from-spruce to-sky absolute top-0 left-0 w-full z-10" style="height:300%"></div>
+      <div class="absolute inset-0 z-20" style="background-image:url(img/stars.png);"></div>
+      <img src="img/shadow-hills.png" class="w-full absolute bottom-0 left-0 z-20">
+      <div class="relative w-full max-w-4xl z-30 mx-4">
+      <div id="close-video-modal" class="absolute top-0 right-0 w-12 h-12 -mt-6 -mr-6 bg-white rounded-full flex items-center justify-center ml-auto cursor-pointer z-40">
+      <span class="text-3xl block" aria-hidden="true">×</span>
+      </div>
+      <div id="video-modal-content" class="videoWrapper bg-gray-200"></div>
+      </div>
+      </div> -->
+  </div>
+  <script src="./js/menu.js"></script>
+</body>
+
+</html>
